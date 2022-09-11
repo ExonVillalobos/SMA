@@ -1,0 +1,99 @@
+<launch>
+<arg name="paused" default="false"/>
+<arg name="use_sim_time" default="true"/>
+<arg name="gui" default="true"/>
+<arg name="headless" default="false"/>
+<arg name="debug" default="false"/>
+<!-- We resume the logic in empty_world.launch -->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+<arg name="debug" value="$(arg debug)" />
+<arg name="gui" value="$(arg gui)" />
+<arg name="paused" value="$(arg paused)"/>
+<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+<arg name="headless" value="$(arg headless)"/>
+</include>
+
+
+<arg name="x1" default="0"/>
+<arg name="y1" default="0"/>
+<arg name="z1" default="0.012"/>
+
+<arg name="x5" default="0.8"/>
+<arg name="y5" default="0.8"/>
+<arg name="z5" default="0.012"/>
+
+<arg name="x2" default="0.8"/>
+<arg name="y2" default="1.6"/>
+<arg name="z2" default="0.012"/>
+
+<arg name="x6" default="0.8"/>
+<arg name="y6" default="2.4"/>
+<arg name="z6" default="0.012"/>
+
+<arg name="x7" default="0"/>
+<arg name="y7" default="2.4"/>
+<arg name="z7" default="0.012"/>
+
+<arg name="x3" default="-0.8"/>
+<arg name="y3" default="2.4"/>
+<arg name="z3" default="0.012"/>
+
+<arg name="x8" default="-0.8"/>
+<arg name="y8" default="1.6"/>
+<arg name="z8" default="0.012"/>
+
+<arg name="x9" default="-0.8"/>
+<arg name="y9" default="0.8"/>
+<arg name="z9" default="0.012"/>
+
+<arg name="x4" default="-0.8"/>
+<arg name="y4" default="0"/>
+<arg name="z4" default="0.012"/>
+
+<arg name="x10" default="0.8"/>
+<arg name="y10" default="0"/>
+<arg name="z10" default="0.012"/>
+
+<param name="robot1" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD1.xacro'" />
+<param name="robot2" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD2.xacro'" />
+<param name="robot3" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD3.xacro'" />
+<param name="robot4" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD4.xacro'" />
+<param name="robot5" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD5.xacro'" />
+<param name="robot6" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD6.xacro'" />
+<param name="robot7" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD7.xacro'" />
+<param name="robot8" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD8.xacro'" />
+<param name="robot9" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD9.xacro'" />
+<param name="robot10" command="$(find xacro)/xacro '$(find RMD)/urdf/RMD10.xacro'" />-->
+
+<node name="urdf_spawner1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif1 -param robot1 -x $(arg x1) -y $(arg y1) -z $(arg z1)">
+</node>
+
+<node name="urdf_spawner2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif2 -param robot2 -x $(arg x2) -y $(arg y2) -z $(arg z2)">
+</node>
+
+<node name="urdf_spawner3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif3 -param robot3 -x $(arg x3) -y $(arg y3) -z $(arg z3)"/>
+
+<node name="urdf_spawner4" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif4 -param robot4 -x $(arg x4) -y $(arg y4) -z $(arg z4)"/>
+
+<node name="urdf_spawner5" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif5 -param robot5 -x $(arg x5) -y $(arg y5) -z $(arg z5)"/>
+
+<node name="urdf_spawner6" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif6 -param robot6 -x $(arg x6) -y $(arg y6) -z $(arg z6)"/>
+
+<node name="urdf_spawner7" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif7 -param robot7 -x $(arg x7) -y $(arg y7) -z $(arg z7)"/>
+
+<node name="urdf_spawner8" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif8 -param robot8 -x $(arg x8) -y $(arg y8) -z $(arg z8)"/>
+
+<node name="urdf_spawner9" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif9 -param robot9 -x $(arg x9) -y $(arg y9) -z $(arg z9)"/>
+
+<node name="urdf_spawner10" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+args="-urdf -model dif10 -param robot10 -x $(arg x10) -y $(arg y10) -z $(arg z10)"/>-->
+</launch>

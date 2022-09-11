@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="RMD">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="7.8882E-06 0.010304 0.015319"
+        rpy="0 0 0" />
+      <mass
+        value="0.16545" />
+      <inertia
+        ixx="0.000116"
+        ixy="-1.3693E-10"
+        ixz="5.0864E-09"
+        iyy="0.00012082"
+        iyz="4.8963E-06"
+        izz="0.00020689" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="R_Link">
+    <inertial>
+      <origin
+        xyz="-0.0095 4.099E-17 2.3506E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.015656" />
+      <inertia
+        ixx="2.513E-06"
+        ixy="-4.5727E-21"
+        ixz="-1.3954E-21"
+        iyy="1.8577E-06"
+        iyz="2.1487E-22"
+        izz="1.8577E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/R_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R_joint"
+    type="continuous">
+    <origin
+      xyz="0.0373 0 0.005"
+      rpy="0 0 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_Link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="L_Link">
+    <inertial>
+      <origin
+        xyz="-0.0095 6.5919E-17 2.8189E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.015656" />
+      <inertia
+        ixx="2.513E-06"
+        ixy="-4.5703E-21"
+        ixz="9.9263E-22"
+        iyy="1.8577E-06"
+        iyz="3.9705E-22"
+        izz="1.8577E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/L_Link.STL" />
+      </geometry>
+      <material
+        name="asd">
+        <color
+          rgba="0.99 0.99 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="L_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0373 0 0.005"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L_Link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+</robot>

@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<robot name="RMD1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+     <xacro:macro name="MatInerciaRueda" params="masa">
+      <inertial>
+        <origin
+        xyz="-0.0095 0 0"
+        rpy="0 0 0" />
+      	<mass value="${masa}" />
+        <inertia
+        ixx="2.513E-06"
+        ixy="-4.5727E-21"
+        ixz="-1.3954E-21"
+        iyy="1.8577E-06"
+        iyz="2.1487E-22"
+        izz="1.8577E-06" />
+      </inertial>
+   </xacro:macro>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="1.0792E-06 0.0019022 0.0062789"
+        rpy="0 0 0" />
+      <mass
+        value="0.085922" />
+      <inertia 
+      ixx="2.9758E-05" 
+      ixy="-3.8502E-10" 
+      ixz="5.1049E-09"     
+      iyy="2.4055E-05" 
+      iyz="3.3956E-10" 
+      izz="4.9281E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/base_link.STL" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="R_link">
+<xacro:MatInerciaRueda masa="0.015656"/>
+        <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/R_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/R_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R_joint"
+    type="continuous">
+    <origin
+      xyz="0.0373 0 0.005"
+      rpy="0 0 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="L_link">
+    <xacro:MatInerciaRueda masa="0.015656"/>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/L_Link.STL" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RMD/meshes/L_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="L_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0373 0 0.005"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <gazebo reference="R_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="L_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  
+    <gazebo>
+    <plugin name="differential1" filename="libgazebo_ros_diff_drive.so">
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>false</publishWheelTF>
+      <robotNamespace>/1</robotNamespace>
+      <publishTf>1</publishTf>
+      <publishWheelJointState>false</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50</updateRate> 
+      <leftJoint>L_joint</leftJoint>
+      <rightJoint>R_joint</rightJoint>
+      <wheelSeparation>0.092</wheelSeparation>
+      <wheelDiameter>0.032</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>0.1</wheelTorque>
+      <wheelAcceleration>1</wheelAcceleration>
+      <commandTopic>cmd_vel1</commandTopic>
+      <odometryFrame>odom1</odometryFrame> 
+      <odometryTopic>odom1</odometryTopic> 
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo> 
+  
+</robot>

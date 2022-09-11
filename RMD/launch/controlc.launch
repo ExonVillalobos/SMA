@@ -1,0 +1,104 @@
+<launch>
+  <arg name="kp" default="4"/>
+  <arg name="kd" default="4"/>
+  <arg name="hz" default="200"/>
+  <arg name="tiempos" default="[50,70]"/>
+        
+  <arg name="lx" default="[0,0.9,-0.3,-0.3,0.9,0.6,0.3,-0.9,-0.9,0.3],
+                          [0,0.8,-0.4,-0.4,0.4,0.4,0,-0.4,-0.4,0],
+                          [0,0.8,-0.4,-0.4,0.8,0.8,0,-0.8,-0.8,0]"/>
+    
+  <arg name="ly" default="[0,0.3,0.9,-0.9,-0.3,0.6,0.9,0.3,-0.3,-0.9],
+                          [0,0,0.6,-0.6,-0.2,0.2,0.4,0.2,-0.2,-0.4],
+                          [0,0,0.6,-0.6,-0.4,0.4,0.8,0.4,-0.4,-0.8]"/>
+
+  <node pkg="RMD" type="controlc1.py" name="control1"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+<node pkg="RMD" type="controlc2.py" name="control2"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc3.py" name="control3"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+
+  <node pkg="RMD" type="controlc4.py" name="control4"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc5.py" name="control5"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc6.py" name="control6"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc7.py" name="control7"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc8.py" name="control8"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc9.py" name="control9"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>
+  
+  <node pkg="RMD" type="controlc10.py" name="control10"  output="screen">
+        <param name="hz" value="$(arg hz)" type="double"/>
+        <param name="kp" value="$(arg kp)" type="double"/>
+        <param name="kd" value="$(arg kd)" type="double"/>
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+        <param name="tiempos" value="$(arg tiempos)" type="string" />
+  </node>-->
+</launch>
