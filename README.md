@@ -1,7 +1,8 @@
 # Paquete RMD
 En este paquete se encuentran los archivos URDF, STL, launch y scrips 
 para la implementación de un Sistema de Múltiples Agentes. La versión de 
-ROS utilizada es noetic.
+ROS utilizada es noetic. La tesis: Control de múltiples robots no holónomicos 
+bajo un esquema líder-seguidor.
 
 1.- Debe crearse un espacio de trabajo llamado "SMA" donde se almacene esta carpeta RMD.
 2.- Ejecutar el comando "catkin_make" en una terminal desde el espacio de trabajo.
