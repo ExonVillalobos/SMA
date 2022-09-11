@@ -1,6 +1,7 @@
 import rospy
 import math
 import time
+import ast
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
@@ -14,17 +15,19 @@ k1=rospy.get_param("control2/kp")
 hz=rospy.get_param("control2/hz")
 delta=1/hz
 
-lx1=rospy.get_param("/control2/xl1")
-ly1=rospy.get_param("/control2/yl1")
+lx=ast.literal_eval(rospy.get_param("/control2/lx"))
+ly=ast.literal_eval(rospy.get_param("/control2/ly"))
+lx1=lx[0]
+ly1=ly[0]
 
-lx2=rospy.get_param("/control2/xl2")
-ly2=rospy.get_param("/control2/yl2")
+lx2=lx[1]
+ly2=ly[1]
 
-lx5=rospy.get_param("/control2/xl5")
-ly5=rospy.get_param("/control2/yl5")
+lx5=lx[4]
+ly5=ly[4]
 
-lx8=rospy.get_param("/control2/xl8")
-ly8=rospy.get_param("/control2/yl8")
+lx8=lx[7]
+ly8=ly[7]
 
 th1=0
 x1h=0
@@ -125,7 +128,7 @@ if __name__=="__main__":
     rospy.Subscriber("/1/odom1", Odometry, callback1)
     rospy.Subscriber("/5/odom5", Odometry, callback5)
     rospy.Subscriber("/8/odom8", Odometry, callback8)
-    rate = rospy.Rate(hz) # 10hz
+    rate = rospy.Rate(hz) 
     archivo = open("/home/exon/SMA/src/RMD/scripts/plotear/ah258.txt","w") 
     try:
         print (msg)

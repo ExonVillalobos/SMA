@@ -13,44 +13,43 @@
 <arg name="headless" value="$(arg headless)"/>
 </include>
 
-
-<arg name="x1" default="0"/>
+<arg name="x1" default="1.6"/>
 <arg name="y1" default="0"/>
 <arg name="z1" default="0.012"/>
 
-<arg name="x5" default="0.8"/>
+<arg name="x5" default="2.4"/>
 <arg name="y5" default="0.8"/>
 <arg name="z5" default="0.012"/>
 
-<arg name="x2" default="0.8"/>
+<arg name="x2" default="2.4"/>
 <arg name="y2" default="1.6"/>
 <arg name="z2" default="0.012"/>
 
-<arg name="x6" default="0.8"/>
+<arg name="x6" default="2.4"/>
 <arg name="y6" default="2.4"/>
 <arg name="z6" default="0.012"/>
 
-<arg name="x7" default="0"/>
+<arg name="x7" default="1.6"/>
 <arg name="y7" default="2.4"/>
 <arg name="z7" default="0.012"/>
 
-<arg name="x3" default="-0.8"/>
+<arg name="x3" default="0.8"/>
 <arg name="y3" default="2.4"/>
 <arg name="z3" default="0.012"/>
 
-<arg name="x8" default="-0.8"/>
+<arg name="x8" default="0.8"/>
 <arg name="y8" default="1.6"/>
 <arg name="z8" default="0.012"/>
 
-<arg name="x9" default="-0.8"/>
+<arg name="x9" default="0.8"/>
 <arg name="y9" default="0.8"/>
 <arg name="z9" default="0.012"/>
 
-<arg name="x4" default="-0.8"/>
+<arg name="x4" default="0.8"/>
 <arg name="y4" default="0"/>
 <arg name="z4" default="0.012"/>
 
-<arg name="x10" default="0.8"/>
+<arg name="x10" default="2.4"/>
 <arg name="y10" default="0"/>
 <arg name="z10" default="0.012"/>
 

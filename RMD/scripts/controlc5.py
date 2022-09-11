@@ -22,10 +22,6 @@ t2=tiempos[1]
 
 delta=1/hz
 
-V1=0
-V2=0.01
-w=0.0
-
 lx=ast.literal_eval(rospy.get_param("/control5/lx"))
 ly=ast.literal_eval(rospy.get_param("/control5/ly"))
 
@@ -34,6 +30,10 @@ ly2=ly[0][1]
 
 lx5=lx[0][4]
 ly5=ly[0][4]
+
+V1=0
+V2=0.01
+w=0.0
 
 x5c1=0
 y5c1=0
@@ -122,7 +122,6 @@ def control():
         w=8.68
     if (w<-8.69):
         w=-8.68
-    
     V2=V1
 
 
@@ -138,15 +137,12 @@ if __name__=="__main__":
         print (msg)
         print (delta)
         while not rospy.is_shutdown():
-            #print("\n--------Control2--------")
-            if t > hz*0.5:
+            #print("\n--------Control5--------")
+            if t > hz*0.1:
                 control()
             desfases()
             muestras()
-            #print("th2 ",th2*180/math.pi)
-            #print("error en X = ", x1c1-xd1)
-            #print("error en Y = ", y1c1-yd1)
-            #print("\n--------ERROR--------")
+
             twist = Twist()
             twist.linear.x = V1; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = w

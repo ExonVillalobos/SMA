@@ -1,6 +1,7 @@
 import rospy
 import math
 import time
+import ast
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
@@ -15,14 +16,15 @@ V=0.0
 w=0.0
 k1=rospy.get_param("control6/kp")
 hz=rospy.get_param("control6/hz")
-xd=1.0
-yd=1.0
 
-lx6=rospy.get_param("/control6/xl6")
-ly6=rospy.get_param("/control6/yl6")
+lx=ast.literal_eval(rospy.get_param("/control6/lx"))
+ly=ast.literal_eval(rospy.get_param("/control6/ly"))
 
-lx3=rospy.get_param("/control6/xl3")
-ly3=rospy.get_param("/control6/yl3")
+lx3=lx[2]
+ly3=ly[2]
+
+lx6=lx[5]
+ly6=ly[5]
 
 x6c=0
 y6c=0
@@ -94,13 +96,12 @@ if __name__=="__main__":
     pub = rospy.Publisher('/6/cmd_vel6', Twist, queue_size=5)
     rospy.Subscriber("/3/odom3", Odometry, callback3)
     rospy.Subscriber("/6/odom6", Odometry, callback6)
-    rate = rospy.Rate(hz) # 10hz
+    rate = rospy.Rate(hz) 
     
     try:
         print (msg)
         while not rospy.is_shutdown():
-            #trayectoria()
-            #print("\n--------Control3--------")
+            #print("\n--------Control6--------")
             control()
             #print("th6 ",th6*180/math.pi)
             twist = Twist()

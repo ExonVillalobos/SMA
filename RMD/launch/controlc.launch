@@ -1,7 +1,7 @@
 <launch>
   <arg name="kp" default="4"/>
   <arg name="kd" default="4"/>
-  <arg name="hz" default="200"/>
+  <arg name="hz" default="400"/>
   <arg name="tiempos" default="[50,70]"/>
         
   <arg name="lx" default="[0,0.9,-0.3,-0.3,0.9,0.6,0.3,-0.9,-0.9,0.3],

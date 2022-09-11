@@ -1,46 +1,37 @@
 import rospy
 import math
+import ast
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
-#Mensajes de inicialización de nodo
+#Mensajes de inicialización y fin de nodo
 msg = """
 En linea control 1
 """
 e = """
 EStoy fuera control 1
 """
-# Lectura de ganancias para el control
+# Lectura de ganancias y frecuencia de ejecución para el control
 k1=rospy.get_param("control1/kp")
 hz=rospy.get_param("control1/hz")
 delta=1/hz
+#Lectura de desfases entre agentes
+lx=ast.literal_eval(rospy.get_param("/control1/lx"))
+ly=ast.literal_eval(rospy.get_param("/control1/ly"))
+lx1=lx[0]
+ly1=ly[0]
+
+lx2=lx[1]
+ly2=ly[1]
+
+lx3=lx[2]
+ly3=ly[2]
+
+lx4=lx[3]
+ly4=ly[3]
 # Condiciones iniciales de leyes de control
 V=0.0
 w=0.0
-# Posiciones de referencia
-xd=0
-xd1=0
-yd=0
-dxd=0
-dyd=0
-xini=1.5
-yini=1
-xfin=2.5
-yfin=2
-tini=20
-tfin=40
-#Lectura de desfases entre agentes
-lx1=rospy.get_param("/control1/xl1")
-ly1=rospy.get_param("/control1/yl1")
-
-lx2=rospy.get_param("/control1/xl2")
-ly2=rospy.get_param("/control1/yl2")
-
-lx3=rospy.get_param("/control1/xl3")
-ly3=rospy.get_param("/control1/yl3")
-
-lx4=rospy.get_param("/control1/xl4")
-ly4=rospy.get_param("/control1/yl4")
-#Inicialización de variables para cada agente
+#Variables para cada agente
 x1c=0
 y1c=0
 th1=0
@@ -71,6 +62,17 @@ L=0.092
 
 #Parametros de trayectoria deseada
 t=0
+xd=0
+xd1=0
+yd=0
+dxd=0
+dyd=0
+xini=1.5
+yini=1
+xfin=2.5
+yfin=2
+tini=20
+tfin=40
  
 # Funciones para obtener posicion y ángulo de agentes
 def callback1(data):
@@ -78,12 +80,14 @@ def callback1(data):
     #print(data)
     x1c = data.pose.pose.position.x
     y1c = data.pose.pose.position.y
+    #Calculo de orientación en radianes
     c1  = data.pose.pose.orientation.z
     c2  = data.pose.pose.orientation.w
     th1 = 2*math.atan2(c1,c2)
     if th1 <0:
         th1 = 2*math.pi + th1
     th1 = th1 + math.pi/2
+    #Calculo de punto de operación h menos desfase
     x1h = x1c + h*math.cos(th1) - lx1
     y1h = y1c + h*math.sin(th1) - ly1
     
@@ -129,7 +133,7 @@ def callback4(data):
     x4h = x4c + h*math.cos(th4) - lx4
     y4h = y4c + h*math.sin(th4) - ly4 
     
-# Funcion de control cinematico
+# Control clásico h
 def control():
     global V,w
     r1=dxd-k1*(x1h-xd)-k1*(x1h-x2h)-k1*(x1h-x3h)-k1*(x1h-x4h)
@@ -138,7 +142,7 @@ def control():
     #print(r2)
     V = r1*math.cos(th1) + r2*math.sin(th1)
     w = -r1*math.sin(th1)/h + r2*math.cos(th1)/h
-    
+    #Saturación de salidas en función del robot real
     if (V>0.4):
         V=0.4
     if (V<-0.4):
@@ -172,19 +176,20 @@ def trayectoria():
     print("time= ", time)
     print("error x= ", xd-x1h)
     print("error y= ", yd-y1h)
-    
-    #xd=1*math.sin(time)/(1 + math.cos(time)*math.cos(time))
-    #yd=1*math.sin(time)*math.cos(time)/(1 + math.cos(time)*math.cos(time))
     t=t+1
     
 if __name__=="__main__":
+    #inicialización de nodo
     rospy.init_node('Control1',anonymous=True)
+    #Publicar en tópico
     pub = rospy.Publisher('/1/cmd_vel1', Twist, queue_size=5)
+    #Suscripciones a topicos de agentes vecinos
     rospy.Subscriber("/1/odom1", Odometry, callback1)
     rospy.Subscriber("/2/odom2", Odometry, callback2)
     rospy.Subscriber("/3/odom3", Odometry, callback3)
     rospy.Subscriber("/4/odom4", Odometry, callback4)
-    rate = rospy.Rate(hz) # 10hz
+    rate = rospy.Rate(hz) # Frecuencia de ejecución en Hz
+    #Escirtura de datos en archivo .txt
     archivo = open("/home/exon/SMA/src/RMD/scripts/plotear/ah1234.txt","w") 
     # bloque de detección de errores
     try:

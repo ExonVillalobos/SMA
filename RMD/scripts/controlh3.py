@@ -1,5 +1,6 @@
 import rospy
 import math
+import ast
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
@@ -16,20 +17,21 @@ k1=rospy.get_param("control3/kp")
 hz=rospy.get_param("control3/hz")
 delta=1/hz
 
-xd=1.0
-yd=1.0
+lx=ast.literal_eval(rospy.get_param("/control3/lx"))
+ly=ast.literal_eval(rospy.get_param("/control3/ly"))
 
-lx1=rospy.get_param("/control3/xl1")
-ly1=rospy.get_param("/control3/yl1")
+lx1=lx[0]
+ly1=ly[0]
 
-lx6=rospy.get_param("/control3/xl6")
-ly6=rospy.get_param("/control3/yl6")
+lx3=lx[2]
+ly3=ly[2]
 
-lx3=rospy.get_param("/control3/xl3")
-ly3=rospy.get_param("/control3/yl3")
+lx6=lx[5]
+ly6=ly[5]
 
-lx9=rospy.get_param("/control3/xl9")
-ly9=rospy.get_param("/control3/yl9")
+lx9=lx[8]
+ly9=ly[8]
+
 
 x1c=0
 y1c=0
@@ -141,7 +143,7 @@ if __name__=="__main__":
     rospy.Subscriber("/1/odom1", Odometry, callback1)
     rospy.Subscriber("/6/odom6", Odometry, callback6)
     rospy.Subscriber("/9/odom9", Odometry, callback9)
-    rate = rospy.Rate(hz) # 10hz
+    rate = rospy.Rate(hz)
     archivo = open("/home/exon/SMA/src/RMD/scripts/plotear/ah369.txt","w") 
     
     try:

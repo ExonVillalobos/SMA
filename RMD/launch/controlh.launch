@@ -1,131 +1,77 @@
 <launch>
-  <arg name="kp" default="0.4"/>
+  <arg name="kp" default="2"/>
   <arg name="hz" default="400"/>
   
-  <arg name="xl1" default="0"/>
-  <arg name="xl10" default="0.4"/>
-  <arg name="xl5" default="1.2"/>
-  <arg name="xl2" default="1.2"/>
-  <arg name="xl6" default="0.8"/>
-  <arg name="xl7" default="0.4"/>
-  <arg name="xl3" default="-0.4"/>
-  <arg name="xl8" default="-1.2"/>
-  <arg name="xl9" default="-1.2"/>
-  <arg name="xl4" default="-0.4"/>
-  
-  <arg name="yl1" default="0"/>
-  <arg name="yl10" default="-1.2"/>
-  <arg name="yl5" default="-0.4"/>
-  <arg name="yl2" default="0.4"/>
-  <arg name="yl6" default="0.8"/>
-  <arg name="yl7" default="1.2"/>
-  <arg name="yl3" default="1.2"/>
-  <arg name="yl8" default="0.4"/>
-  <arg name="yl9" default="-0.4"/>
-  <arg name="yl4" default="-1.2"/>
+  <arg name="lx" default="[0,0.9,-0.3,-0.3,0.9,0.6,0.3,-0.9,-0.9,0.3]"/>
+  <arg name="ly" default="[0,0.3,0.9,-0.9,-0.3,0.6,0.9,0.3,-0.3,-0.9]"/>
   
   <node pkg="RMD" type="controlh1.py" name="control1"  output="screen">
         <param name="hz" value="$(arg hz)" type="double"/>
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl1" value="$(arg xl1)" type="double" />
-        <param name="yl1" value="$(arg yl1)" type="double" />
-        <param name="xl2" value="$(arg xl2)" type="double" />
-        <param name="yl2" value="$(arg yl2)" type="double" />
-        <param name="xl3" value="$(arg xl3)" type="double" />
-        <param name="yl3" value="$(arg yl3)" type="double" />
-        <param name="xl4" value="$(arg xl4)" type="double" />
-        <param name="yl4" value="$(arg yl4)" type="double" />-->
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
+-->
   </node>
   <node pkg="RMD" type="controlh2.py" name="control2"  output="screen">
         <param name='kp' value="$(arg kp)" type="double" />
-        <param name="xl1" value="$(arg xl1)" type="double" />
-        <param name="yl1" value="$(arg yl1)" type="double" />
-        <param name="xl2" value="$(arg xl2)" type="double" />
-        <param name="yl2" value="$(arg yl2)" type="double" />
-        <param name="xl5" value="$(arg xl5)" type="double" />
-        <param name="yl5" value="$(arg yl5)" type="double" />
-        <param name="xl8" value="$(arg xl8)" type="double" />
-        <param name="yl8" value="$(arg yl8)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh3.py" name="control3"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl1" value="$(arg xl1)" type="double" />
-        <param name="yl1" value="$(arg yl1)" type="double" />
-        <param name="xl3" value="$(arg xl3)" type="double" />
-        <param name="yl3" value="$(arg yl3)" type="double" />
-        <param name="xl6" value="$(arg xl6)" type="double" />
-        <param name="yl6" value="$(arg yl6)" type="double" />
-        <param name="xl9" value="$(arg xl9)" type="double" />
-        <param name="yl9" value="$(arg yl9)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh4.py" name="control4"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl1" value="$(arg xl1)" type="double" />
-        <param name="yl1" value="$(arg yl1)" type="double" />
-        <param name="xl4" value="$(arg xl4)" type="double" />
-        <param name="yl4" value="$(arg yl4)" type="double" />
-        <param name="xl7" value="$(arg xl7)" type="double" />
-        <param name="yl7" value="$(arg yl7)" type="double" />
-        <param name="xl10" value="$(arg xl10)" type="double" />
-        <param name="yl10" value="$(arg yl10)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
 
   <node pkg="RMD" type="controlh5.py" name="control5"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl2" value="$(arg xl2)" type="double" />
-        <param name="yl2" value="$(arg yl2)" type="double" />
-        <param name="xl5" value="$(arg xl5)" type="double" />
-        <param name="yl5" value="$(arg yl5)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh6.py" name="control6"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl3" value="$(arg xl3)" type="double" />
-        <param name="yl3" value="$(arg yl3)" type="double" />
-        <param name="xl6" value="$(arg xl6)" type="double" />
-        <param name="yl6" value="$(arg yl6)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh7.py" name="control7"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl4" value="$(arg xl4)" type="double" />
-        <param name="yl4" value="$(arg yl4)" type="double" />
-        <param name="xl7" value="$(arg xl7)" type="double" />
-        <param name="yl7" value="$(arg yl7)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh8.py" name="control8"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl2" value="$(arg xl2)" type="double" />
-        <param name="yl2" value="$(arg yl2)" type="double" />
-        <param name="xl8" value="$(arg xl8)" type="double" />
-        <param name="yl8" value="$(arg yl8)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh9.py" name="control9"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl3" value="$(arg xl3)" type="double" />
-        <param name="yl3" value="$(arg yl3)" type="double" />
-        <param name="xl9" value="$(arg xl9)" type="double" />
-        <param name="yl9" value="$(arg yl9)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>
   
   <node pkg="RMD" type="controlh10.py" name="control10"  output="screen">
         <param name="kp" value="$(arg kp)" type="double" />
-        <param name="xl4" value="$(arg xl4)" type="double" />
-        <param name="yl4" value="$(arg yl4)" type="double" />
-        <param name="xl10" value="$(arg xl10)" type="double" />
-        <param name="yl10" value="$(arg yl10)" type="double" />
+        <param name="lx" value="$(arg lx)" type="string" />
+        <param name="ly" value="$(arg ly)" type="string" />
         <param name="hz" value="$(arg hz)" type="double"/>
    </node>-->
   

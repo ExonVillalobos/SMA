@@ -4,22 +4,25 @@ import time
 import ast
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
-
+#Mensajes de inicialización y fin de nodo
 msg = """
 En linea control 1
 """
 e = """
 EStoy fuera control 1
 """
-
+# Lectura de ganancias y frecuencia de ejecución para el control
 k0=rospy.get_param("control1/kp")
 k1=rospy.get_param("control1/kd")
 hz=rospy.get_param("control1/hz")
+delta=1/hz
 
+#Lectura de tiempos para cada formación
 tiempos=ast.literal_eval(rospy.get_param("/control1/tiempos"))
 t1=tiempos[0]
 t2=tiempos[1]
 
+# Lectura de desfases entre agentes
 lx=ast.literal_eval(rospy.get_param("/control1/lx"))
 ly=ast.literal_eval(rospy.get_param("/control1/ly"))
 lx1=lx[0][0]
@@ -34,28 +37,12 @@ ly3=ly[0][2]
 lx4=lx[0][3]
 ly4=ly[0][3]
 
-delta=1/hz
-xd=0
-xd1=0
-yd=0
-yd1=0
-dxd=0
-dxd1=0
-dyd=0
-dyd1=0
-ddxd=0
-ddyd=0
-xini=1.5
-yini=1
-xfin=2.5
-yfin=2
-tini=20
-tfin=40
-
+#Condiciones iniciales de leyes de control
 V1=0
 V2=0.01
 w=0.0
 
+#Variables para cada agente
 x1c1=0
 dx1c=0
 y1c1=0
@@ -78,14 +65,35 @@ y4c1=0
 x4c2=0
 y4c2=0
 
+#Parametros de robot móvil
 L=0.092
+
+#Parametros de trayectoria deseada
+xd=0
+xd1=0
+yd=0
+yd1=0
+dxd=0
+dxd1=0
+dyd=0
+dyd1=0
+ddxd=0
+ddyd=0
+xini=1.5
+yini=1
+xfin=2.5
+yfin=2
+tini=20
+tfin=40
 t=0
- 
+
+# Funciones para obtener posicion y ángulo de agentes
 def callback1(data):
     global x1c1,y1c1,th1
+    #posiciones X y Y en punto c
     x1c1 = data.pose.pose.position.x
     y1c1 = data.pose.pose.position.y
-    
+    #Calculo de orientación en radianes
     c1  = data.pose.pose.orientation.z
     c2  = data.pose.pose.orientation.w
     th1 = 2*math.atan2(c1,c2)
@@ -125,7 +133,8 @@ def muestras():
     
     x4c2 = x4c1
     y4c2 = y4c1
-    
+
+#Función que cambia el valor de los desfases
 def desfases():
     global lx1,ly1,lx2,ly2,lx3,ly3,lx4,ly4
     if t>t1*hz:
@@ -153,6 +162,7 @@ def desfases():
         lx4=lx[2][3]
         ly4=ly[2][3]
     
+#Planitud diferencial
 def control():
     global V1,V2,w
     # calculo de velocidades 
@@ -197,7 +207,8 @@ def control():
         w=-8.68
     V2=V1
     
-def trayectoria2():
+# Funcion de trayectoria deseada: curva Bézier
+def trayectoria():
     global t,xd,yd,dxd,dyd,ddxd,ddyd,xd1,dxd1
     time=t*delta
     tau= (time - tini)/(tfin-tini)
@@ -221,8 +232,9 @@ def trayectoria2():
     #print(dxd)
     #print(dyd)
     t=t+1
-    
-def trayectoria():
+
+# Funcion de trayectoria deseada: Leminiscata
+def leminiscata():
     global t,xd,yd,dxd,dyd,ddxd,ddyd,xd1,dxd1,yd1,dyd1
     time2=t*delta
     time=0.05*t*delta
@@ -238,8 +250,6 @@ def trayectoria():
     dyd1=dyd
     print("#####################################")
     print("time= ", time2)
-    #print(dxd)
-    #print(dyd)
     t=t+1
     
 if __name__=="__main__":
@@ -250,7 +260,7 @@ if __name__=="__main__":
     rospy.Subscriber("/2/odom2", Odometry, callback2)
     rospy.Subscriber("/3/odom3", Odometry, callback3)
     rospy.Subscriber("/4/odom4", Odometry, callback4)
-    rate = rospy.Rate(hz) # Hz
+    rate = rospy.Rate(hz) # Frecuencia de ejecución en Hz
     archivo = open("/home/exon/SMA/src/RMD/scripts/plotear/ac1234.txt","w") 
     
     
@@ -258,18 +268,16 @@ if __name__=="__main__":
         print (msg)
         print (delta)
         while not rospy.is_shutdown():
-            trayectoria()
+            leminiscata()
             #print("\n--------Control1--------")
-            if t > hz*0.5:
+            if t > hz*0.1:
                 control()
             desfases()
             muestras()
-            #print("th1 ",th1*180/math.pi)
             print("error en X = ", x1c1-lx1-xd)
             print("error en Y = ", y1c1-ly1-yd)
             print("xd = ", xd)
             print("yd = ", yd)
-            #print("\n--------ERROR--------")
             twist = Twist()
             twist.linear.x = V1; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = w
